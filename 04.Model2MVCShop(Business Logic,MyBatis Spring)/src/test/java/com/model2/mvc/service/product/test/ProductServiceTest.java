@@ -1,5 +1,8 @@
 package com.model2.mvc.service.product.test;
 
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,10 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.model2.mvc.common.Search;
 import com.model2.mvc.service.domain.Product;
-import com.model2.mvc.service.product.ProductDao;
 import com.model2.mvc.service.product.ProductService;
-import com.model2.mvc.service.product.impl.ProductDaoImpl;
-import com.model2.mvc.service.user.UserService;
+
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -37,16 +38,21 @@ public class ProductServiceTest {
 		
 	}
 	
-	//@Test
+	@Test
 	public void testGetProduct() throws Exception {
+
 		Product product = new Product();
-		
-		
-		productService.getProduct(10001);
+		product = productService.getProduct(10001);
+		System.out.println(productService.getProduct(10001));
 		System.out.println(product.toString());
+		
+		Assert.assertEquals(10001,product.getProdNo());
+		
+		Assert.assertNotNull(product);
+		
 	}
 	
-	@Test
+	//@Test
 	public void testGetProductList() throws Exception{
 		Search search = new Search();
 		search.setCurrentPage(1);
@@ -54,7 +60,15 @@ public class ProductServiceTest {
 		search.setSearchCondition("0");
 		search.setSearchKeyword("1000");
 		
-		productService.getProductList(search);
+		Map<String,Object> map = productService.getProductList(search);
+		
+		List<Object> list = (List<Object>)map.get("list");
+		Assert.assertEquals(3, list.size());
+		
+		Integer totalCount = (Integer)map.get("totalCount");
+		System.out.println(totalCount);
+		
+		
 		
 	}
 	
@@ -73,7 +87,7 @@ public class ProductServiceTest {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testGetTotalCount() throws Exception {
 		Search search = new Search();
 		search.setSearchCondition("0");

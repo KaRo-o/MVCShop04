@@ -15,11 +15,26 @@ public class Search {
 	//==> ÂüÁ¶
 	private int endRowNum;
 	private int startRowNum;
+	private String userId;
 	
 	///Constructor
 	public Search() {
 	}
 	
+	
+	
+	public String getUserId() {
+		return userId;
+	}
+
+
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+
+
 	///Method
 	public int getPageSize() {
 		return pageSize;
