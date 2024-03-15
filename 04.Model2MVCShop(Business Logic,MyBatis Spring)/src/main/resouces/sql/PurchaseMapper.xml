@@ -22,7 +22,8 @@
 		
 		<!-- <association property="buyer" javaType="user" column="buyer_id" resultMap="userSelectMap" /> -->
 		<association property="buyer" javaType="user" column="buyer_id" select="UserMapper.getUser" />
-		<association property="purchaseProd" javaType="product" column="prod_no" resultMap="productSelectMap" />
+		<!-- <association property="purchaseProd" javaType="product" column="prod_no" resultMap="productSelectMap" /> -->
+		<association property="purchaseProd" javaType="product" column="prod_no" select="ProductMapper.getProduct" />
 		     
 	</resultMap>
 	
@@ -62,6 +63,8 @@
 	            SYSDATE, #{dlvyDate})
 	</insert>
 	
+	
+	
 	<select id="getPurchase" parameterType="int" resultMap="purchaseSelectMap">
 		SELECT tran_no, prod_no, buyer_id, payment_option, receiver_name, receiver_phone,
 	                demailaddr, dlvy_request, tran_status_code, order_data, dlvy_date
@@ -69,11 +72,15 @@
 		WHERE tran_no = #{value}
 	</select>
 	
+	
+	
 	<select id="getPurchaseList" parameterType="search"  resultMap="purchaseSelectMap">
 		SELECT * FROM transaction t, users u
 		WHERE u.user_id = #{userId} AND u.user_id = t.buyer_id
 		ORDER BY t.tran_no
 	</select>
+	
+	
 	
 	<update id="updatePurchase" parameterType="purchase">
 		UPDATE transaction
@@ -82,8 +89,14 @@
 			  DLVY_REQUEST = #{dlvyRequest}, DLVY_DATE = #{dlvyDate} 
 		WHERE tran_no = #{tranNo}
 	</update>
-
 	
+	
+
+	<update id="updateTranCode" parameterType="purchase">
+		UPDATE transaction
+		SET tran_status_code = #{tranCode}
+		WHERE tran_no = #{tranNo}
+	</update>
 	
 	
 	
