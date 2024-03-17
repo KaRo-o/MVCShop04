@@ -17,7 +17,7 @@
 		<!-- <result property="purchaseProd" 		column="prod_no" 				jdbcType="VARCHAR" /> -->
 		<result property="receiverName"		column="receiver_name"		jdbcType="VARCHAR" />
 		<result property="receiverPhone"		column="receiver_phone"		jdbcType="VARCHAR" />
-		<result property="tranCode"				column="tran_status_code"	jdbcType="VARCHAR" />
+		<result property="tranCode"				column="tran_status_code"	jdbcType="CHAR" />
 		<result property="tranNo"				column="tran_no"				jdbcType="VARCHAR" />
 		
 		<!-- <association property="buyer" javaType="user" column="buyer_id" resultMap="userSelectMap" /> -->
@@ -94,8 +94,8 @@
 
 	<update id="updateTranCode" parameterType="purchase">
 		UPDATE transaction
-		SET tran_status_code = #{tranCode}
-		WHERE tran_no = #{tranNo}
+		SET TRAN_STATUS_CODE = ${tranCode}
+		WHERE tran_no = ${tranNo}
 	</update>
 	
 	

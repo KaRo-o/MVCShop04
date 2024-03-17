@@ -67,7 +67,7 @@ public class PurchaseServiceTest {
 	//@Test
 	public void testGetPurchase() throws Exception {
 		Purchase purchase = new Purchase();
-		purchase = purchaseService.getPurchase(10021);
+		purchase = purchaseService.getPurchase(10000);
 		System.out.println(purchase);
 	}
 	
@@ -85,22 +85,34 @@ public class PurchaseServiceTest {
 		System.out.println(totalCount);
 	}
 	
-	@Test
+	//@Test
 	public void testUpdatePurchase() throws Exception {
 		
 		Purchase purchase = new Purchase();
+		purchase.setTranNo(10000);
 		purchase.setPaymentOption("2");
 		purchase.setReceiverName("update");
 		purchase.setReceiverPhone("010-9999-9999");
 		purchase.setDlvyAddr("updateAddr");
 		purchase.setDlvyRequest("update");
 		purchase.setDlvyDate("24/03/03");
-		purchase.setTranNo(10000);
+		
 		
 		purchaseService.updatePurchase(purchase);
 	}
 	
-
+	@Test
+	public void testUpdateTranCode() throws Exception {
+		
+		Purchase purchase = new Purchase();
+		purchase.setTranNo(10000);
+		purchase.setTranCode("2");
+		
+		System.out.println(purchase);
+		
+		purchaseService.updateTranCode(purchase);
+		
+	}
 	
 	
 	
