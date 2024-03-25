@@ -64,7 +64,7 @@ public class PurchaseServiceTest {
 
 	}
 	
-	//@Test
+	@Test
 	public void testGetPurchase() throws Exception {
 		Purchase purchase = new Purchase();
 		purchase = purchaseService.getPurchase(10000);
